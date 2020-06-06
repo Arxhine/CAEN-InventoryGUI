@@ -1,0 +1,11 @@
+serialNo
+otherTagNo
+machineDescription
+osType
+osVersion
+owner
+primaryUser
+room
+building
+purchased
+primaryMac
