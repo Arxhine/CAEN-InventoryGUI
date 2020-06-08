@@ -8,7 +8,7 @@ Semi-automation of the CAEN laptop inventory process
 Runs on Python and Javascript, compatible with Windows.
 
 # Setup (Windows)
-1. Download the InventoryGUI_exe.zip file from the releases tab or within the repo
+1. Download the InventoryGUI_exe.zip file from within the repo
 2. Extract the files to a folder and run inventoryGUI.exe
 3. Done
 
