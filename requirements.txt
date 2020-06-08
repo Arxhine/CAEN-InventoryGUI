@@ -1,0 +1,6 @@
+numpy
+cv2
+xlsxwriter
+pyzbar
+tkinter
+os
