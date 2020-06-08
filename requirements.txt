@@ -1,6 +1,6 @@
 numpy
-cv2
-xlsxwriter
+opencv-python
+pathlib
 pyzbar
-tkinter
-os
+XlsxWriter
+argparse

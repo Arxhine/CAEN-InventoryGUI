@@ -9,9 +9,10 @@ Runs on Python and Javascript, compatible with Windows.
 # Setup
 1. Install [Python](https://www.python.org/downloads/) and add to PATH
 2. Download ```InventoryGUI.py```, ```fields.txt```, and ```dropdowns.txt``` to the same folder
-3. Using pip, install the modules in ```requirements.txt```
-4. Run ```python inventoryGUI.py```
-5. Done
+3. Install Microsoft Visual C++ Redistributable Package 2013 (x64)
+4. Using pip, install the modules in ```requirements.txt```
+5. Run ```python inventoryGUI.py```
+6. Done
 
 # Usage
 1. Take one picture of each laptop box label, clearly displaying the Serial# and LAN MAC Address barcodes
