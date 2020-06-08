@@ -2,7 +2,7 @@
 Semi-automation of the CAEN laptop inventory process
 
 * Removes human error of misreading/mistyping Serial# and LAN MAC Address for laptops
-* Automatically and instantaneously inputs all required information for adding inventory
+* Semi-automatically and near-instantaneously inputs all required information for adding inventory
 
 Runs on Python and Javascript, compatible with Windows.
 
