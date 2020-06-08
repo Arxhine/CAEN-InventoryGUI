@@ -27,14 +27,14 @@ Runs on Python and Javascript, compatible with Windows.
 4. When the GUI opens up, select the image folder from Step 2 and fill out/edit each field
 	> Note: It is best to pull the exact spelling and formatting from the CAEN inventory website
 5. Click the "Start" button. This will create:
-	a. An Excel spreadsheet with the Serial#s, LAN MAC Addresses, and (optional) Names for each laptop
-	b. A text file with the Javascript commands for each laptop
-	c. An Excel spreadsheet with the Javascript commands for each laptop
-	> Note: it doesn't matter which of b and c you use, just a matter of personal preference
+	1. An Excel spreadsheet with the Serial#s, LAN MAC Addresses, and (optional) Names for each laptop
+	2. A text file with the Javascript commands for each laptop
+	3. An Excel spreadsheet with the Javascript commands for each laptop
+	> Note: it doesn't matter which of ii and iii you use, just a matter of personal preference
 6. Open the CAEN inventory website and "Add Inventory"
 7. Right click, then click "Inspect Element" (or press Ctrl Shift I)
 8. Click on "Console"
-9. From 5b or 5c, copy the respective script, paste into the Console, and hit the "Enter" key. This should automatically fill in the required fields, save, and clone to a new inventory entry
+9. From 5.ii or 5.iii, copy the respective script, paste into the Console, and hit the "Enter" key. This should automatically fill in the required fields, save, and clone to a new inventory entry
 10. Repeat Step 9 for all laptop inventory scripts generated
 
 # Usage (Python)
@@ -44,12 +44,12 @@ Runs on Python and Javascript, compatible with Windows.
 4. When the GUI opens up, select the image folder from Step 2 and fill out/edit each field
 	> Note: the default values can be easily edited in inventoryGUI.py. It is best to pull the exact spelling and formatting from the CAEN inventory website
 5. Click the "Start" button. This will create:
-	a. An Excel spreadsheet with the Serial#s, LAN MAC Addresses, and (optional) Names for each laptop
-	b. A text file with the Javascript commands for each laptop
-	c. An Excel spreadsheet with the Javascript commands for each laptop
-	> Note: it doesn't matter which of b and c you use, just a matter of personal preference
+	1. An Excel spreadsheet with the Serial#s, LAN MAC Addresses, and (optional) Names for each laptop
+	2. A text file with the Javascript commands for each laptop
+	3. An Excel spreadsheet with the Javascript commands for each laptop
+	> Note: it doesn't matter which of ii and iii you use, just a matter of personal preference
 6. Open the CAEN inventory website and "Add Inventory"
 7. Right click, then click "Inspect Element" (or press Ctrl Shift I)
 8. Click on "Console"
-9. From 5b or 5c, copy the respective script, paste into the Console, and hit the "Enter" key. This should automatically fill in the required fields, save, and clone to a new inventory entry
+9. From 5.ii or 5.iii, copy the respective script, paste into the Console, and hit the "Enter" key. This should automatically fill in the required fields, save, and clone to a new inventory entry
 10. Repeat Step 9 for all laptop inventory scripts generated
