@@ -1,6 +1,6 @@
 # University of Michigan CAEN EACS Laptop Inventory #
 # Developed by Arthur Su #
-# Last edited: 6/5/2020 #
+# Last edited: 6/7/2020 #
 
 from __future__ import print_function
 import pyzbar.pyzbar as pyzbar
@@ -30,7 +30,7 @@ defOwner = "EACS"
 defPrimaryUser = "EACS"
 defRoom = "G255"
 defBuilding = "LEC"
-defPurchaseDate = ""
+defPurchaseDate = "*FILL ME OUT*"
 
 # Creates GUI window
 window = Tk()
@@ -60,7 +60,6 @@ unit = ""
 machineType = ""
 status = ""
 increment = 0
-
 
 # Clears some vars
 folderPath = ""
@@ -110,7 +109,7 @@ namePrefixGUI.insert(0, defNamePrefix)
 namePrefixGUI.grid(column = 4, row = 7)
 
 # Group 3 - Required information
-group3 = LabelFrame(window, text = "Required info", padx = 1, pady = 1)
+group3 = LabelFrame(window, text = "Required info - check website for formatting", padx = 1, pady = 1)
 group3.grid(padx = 0, pady = 0)
 
 # Info to be filled out
@@ -180,7 +179,7 @@ buildingGUI = Entry(group3, width = 20)
 buildingGUI.insert(0, defBuilding)
 buildingGUI.grid(column = 4, row = 30)
 
-label16 = Label(group3, text = "Date Purchased")
+label16 = Label(group3, text = "Date Purchased (**/**/****)")
 label16.grid(column = 0, row = 32)
 purchasedGUI = Entry(group3, width = 20)
 purchasedGUI.insert(0, defPurchaseDate)
@@ -207,71 +206,43 @@ def getDropdowns():
     
 # Creates JS script for text input fields
 def scriptTextFields(allLines, fieldArray, outputName, namePrefix, increment):
+    # Creates array of info values
+    textFieldValues = [serialNumberList[increment], namePrefix + "-" +
+        serialNumberList[increment], machineDescriptionGUI.get(), osTypeGUI.get(),
+        osVersionGUI.get(), ownerGUI.get(), primaryUserGUI.get(), roomGUI.get(),
+        buildingGUI.get(), purchasedGUI.get(), macAddressList[increment]]
+
     # Increments through text fields, adds respective commands to JS script
-    for obj in fieldArray:
-        if(obj == "serialNo"):
-            allLines.append("document.getElementById('" + obj + "').value = '" + serialNumberList[increment] + "';\n")
-        elif(obj == "otherTagNo"):
-            allLines.append("document.getElementById('" + obj + "').value = '" + namePrefix + "-" + serialNumberList[increment] + "';\n")
-        elif(obj == "machineDescription"):
-            allLines.append("document.getElementById('" + obj + "').value = '" + machineDescriptionGUI.get() + "';\n")
-        elif(obj == "osType"):
-            allLines.append("document.getElementById('" + obj + "').value = '" + osTypeGUI.get() + "';\n")
-        elif(obj == "osVersion"):
-            allLines.append("document.getElementById('" + obj + "').value = '" + osVersionGUI.get() + "';\n")
-        elif(obj == "owner"):
-            allLines.append("document.getElementById('" + obj + "').value = '" + ownerGUI.get() + "';\n")
-        elif(obj == "primaryUser"):
-            allLines.append("document.getElementById('" + obj + "').value = '" + primaryUserGUI.get() + "';\n")
-        elif(obj == "room"):
-            allLines.append("document.getElementById('" + obj + "').value = '" + roomGUI.get() + "';\n")
-        elif(obj == "building"):
-            allLines.append("document.getElementById('" + obj + "').value = '" + buildingGUI.get() + "';\n")
-        elif(obj == "purchased"):
-            allLines.append("document.getElementById('" + obj + "').value = '" + purchasedGUI.get() + "';\n")
-        elif(obj == "primaryMac"):
-            allLines.append("document.getElementById('" + obj + "').value = '" + macAddressList[increment] + "';\n")
-            
+    for obj in range(0, len(fieldArray)):
+        allLines.append("document.getElementById('" + fieldArray[obj] + "').value = '" + textFieldValues[obj] + "';\n")
+                    
 # Creates JS script for dropdown menus
 def scriptDropdowns(allLines, dropdownArray):
+    # Creates array of info values
+    dropdownMenuValues = [departmentGUI.get(), unitGUI.get(), 
+        machineTypeGUI.get(), statusGUI.get()]
+    
     # Increments through dropdown menus, adds respective commands to JS script
-    for obj in dropdownArray:
-        if(obj == "department"):
-            allLines.append('function setSelectedIndex(s, ' + departmentGUI.get() + ') {')
+    for obj in range(0, len(dropdownArray)):
+        if(dropdownArray[obj] != "unit"):
+            allLines.append('function setSelectedIndex(s, ' + dropdownMenuValues[obj] + ') {')
             allLines.append('for (var i = 0; i < s.options.length; i++) {')
-            allLines.append('if (s.options[i].text == ' + departmentGUI.get() + ') {')
-            allLines.append('s.options[i].selected = true;')
-            allLines.append('return;')
-            allLines.append('}')
-            allLines.append('}')
-            allLines.append('}')
-            allLines.append('setSelectedIndex(document.getElementById("' + obj + '"), "' + departmentGUI.get() + '");\n')
-        elif(obj == "unit"):
-            #Apparently this works too... Had some issues with the "-" character when running the JS
-            allLines.append('document.getElementById("' + obj + '").value = "' + unitGUI.get() + '";\n')
-        elif(obj == "machineType"):
-            allLines.append('function setSelectedIndex(s, ' + machineTypeGUI.get() + ') {')
-            allLines.append('for (var i = 0; i < s.options.length; i++) {')
-            allLines.append('if (s.options[i].text == ' + machineTypeGUI.get() + ') {')
-            allLines.append('s.options[i].selected = true;')
-            allLines.append('return;')
-            allLines.append('}')
-            allLines.append('}')
-            allLines.append('}')
-            allLines.append('setSelectedIndex(document.getElementById("' + obj + '"), "' + machineTypeGUI.get() + '");\n')
-        elif(obj == "status"):
-            allLines.append('function setSelectedIndex(s, ' + statusGUI.get() + ') {')
-            allLines.append('for (var i = 0; i < s.options.length; i++) {')
-            allLines.append('if (s.options[i].text == ' + statusGUI.get() + ') {')
-            allLines.append('s.options[i].selected = true;')
-            allLines.append('return;')
-            allLines.append('}')
-            allLines.append('}')
-            allLines.append('}')
-            allLines.append('setSelectedIndex(document.getElementById("' + obj + '"), "' + statusGUI.get() + '");\n')
+            allLines.append('if (s.options[i].text == ' + dropdownMenuValues[obj] + ') {')
+            allLines.append('s.options[i].selected = true;return;}}}')
+            allLines.append('setSelectedIndex(document.getElementById("' + dropdownArray[obj] + '"), "' + dropdownMenuValues[obj] + '");\n')
+        else:
+            # Units are tricky because of the "-" in the name
+            allLines.append('document.getElementById("' + dropdownArray[obj] + '").value = "' + unitGUI.get() + '";\n')
             
 # Calls scriptTextFields and scriptDropdowns to write the JS to outputName_script.js
 def createScript(folderPath, allLines, getDropdowns, outputName, namePrefix, department, unit, machineType, status):
+    # Creates Excel spreadsheet for script commands
+    workbook = xlsxwriter.Workbook(outputName + "_script.xlsx")
+    worksheet2 = workbook.add_worksheet()
+    worksheet2.write_string(0, 0, "Number")
+    worksheet2.write_string(0, 1, "Script Command")
+    worksheet2.set_column('A:A', 7)
+    
     of = outputName + "_script.txt"
     
     increment = 0
@@ -281,18 +252,27 @@ def createScript(folderPath, allLines, getDropdowns, outputName, namePrefix, dep
         fileCount += 1
     print(str(fileCount) + " images processed")
     
+    outfile = open(of, 'w')
     # Increments through the number of images in folder
     while(increment < fileCount):
         scriptTextFields(allLines, getFields(), outputName, namePrefix, increment)
         scriptDropdowns(allLines, getDropdowns())
-        allLines.append('\n')
-        increment += 1
         
-    # Saves inventory form
-    allLines.append("document.getElementById('inventoryForm-save').click();\n")
-    
-    outfile = open(of, 'w')
-    outfile.writelines(allLines)
+        # Saves inventory form
+        allLines.append("document.getElementById('inventoryForm-save').click();\n")
+        
+        # Waits two seconds, then clones the inventory form
+        allLines.append("setTimeout(() => {document.getElementsByClassName('btn-warning')[0].click();}, 2000);")
+        allLines.append('\n\n')
+        outfile.writelines(allLines)
+        
+        # Writes JS script to Excel spreadsheet
+        worksheet2.write_string(increment + 1, 1, "".join(allLines))
+        worksheet2.write_number(increment + 1, 0, increment)
+        
+        increment += 1
+        allLines = []
+    workbook.close()
     outfile.close()        
 
 # Action after clicking start button
@@ -307,15 +287,17 @@ def inventory(folderPath, outputName, namePrefix):
     imageNum = 0
     nameTrigger = 0
     
-    # Creates Excel spreadsheet
+    # Creates Excel spreadsheet for laptop information
     workbook = xlsxwriter.Workbook(outputName + ".xlsx")
-    worksheet = workbook.add_worksheet()
-    worksheet.write_string(0, 0, "Serial#")
-    worksheet.write_string(0, 1, "LAN MAC")
+    worksheet1 = workbook.add_worksheet()
+    worksheet1.write_string(0, 0, "Serial#")
+    worksheet1.write_string(0, 1, "LAN MAC")
     if namePrefix != "":
-        worksheet.write_string(0, 2, "Name")
+        worksheet1.write_string(0, 2, "Name")
         nameTrigger = 1
-    
+        worksheet1.set_column('C:C', 18)
+    worksheet1.set_column('A:B', 18)
+        
     # Iterates through images in folder
     images = Path(folderPath)
     for image in images.iterdir():
@@ -339,25 +321,26 @@ def inventory(folderPath, outputName, namePrefix):
             # Writes serial number to spreadsheet
             elif len(barcode.data.decode("utf-8")) == 10:
                 print ("Serial# found, result {}".format(barcodeNum))
-                worksheet.write_string(imageNum, 0, barcode.data.decode("utf-8"))
+                worksheet1.write_string(imageNum, 0, barcode.data.decode("utf-8"))
                 serialNumberList.append(barcode.data.decode("utf-8"))
                 if nameTrigger == 1:
-                    worksheet.write_string(imageNum, 2, namePrefix + "-" + barcode.data.decode("utf-8"))
+                    worksheet1.write_string(imageNum, 2, namePrefix + "-" + barcode.data.decode("utf-8"))
                     nameList.append(barcode.data.decode("utf-8"))
             # Writes LAN MAC address to spreadsheet
             elif macFormat.match(barcode.data.decode("utf-8")):
                 print ("LAN MAC found, result {}".format(barcodeNum))
-                worksheet.write_string(imageNum, 1, barcode.data.decode("utf-8"))
+                worksheet1.write_string(imageNum, 1, barcode.data.decode("utf-8"))
                 macAddressList.append(barcode.data.decode("utf-8"))
             # Filters out everything else
             else:
                 print ("Nothing found, result {}".format(barcodeNum))
         print("")
-        barcodeNum = 0
-    
+        barcodeNum = 0  
+        
+    # Creates JS script
     createScript(folderPath, allLines, getDropdowns, outputName, namePrefix, departmentGUI.get(), unitGUI.get(), machineTypeGUI.get(), statusGUI.get())
     
-    workbook.close()
+    workbook.close()  
     
 # Start button
 executeButton = Button(window, text="Start", command=execute)
