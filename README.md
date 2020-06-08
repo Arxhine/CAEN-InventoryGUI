@@ -15,7 +15,7 @@ Runs on Python and Javascript, compatible with Windows.
 # Setup (Python)
 1. Install [Python](https://www.python.org/downloads/) and add to PATH
 2. Download ```InventoryGUI.py```, ```fields.txt```, and ```dropdowns.txt``` to the same folder
-3. Install Microsoft Visual C++ Redistributable Package 2013 (x64)
+3. Install [Microsoft Visual C++ Redistributable Package 2013 (x64)](https://www.microsoft.com/en-us/download/details.aspx?id=40784)
 4. Using pip, install the modules in ```requirements.txt```
 5. Run ```python inventoryGUI.py```
 6. Done
